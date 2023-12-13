@@ -13,7 +13,7 @@
 
 using namespace std;
 
-class test_x : public ::testing::Test {
+class test_AVLTree : public ::testing::Test {
 protected:
 	// This function runs only once before any TEST_F function
 	static void SetUpTestCase(){
@@ -59,8 +59,8 @@ protected:
 	static double max_grade;
 };
 
-double test_x::total_grade = 0;
-double test_x::max_grade = 100;
+double test_AVLTree::total_grade = 0;
+double test_AVLTree::max_grade = 100;
 
 /////////////////////////////////////////
 // Test Helper Functions
@@ -85,7 +85,7 @@ std::string exec(const char* cmd) {
 // Tests start here
 /////////////////////////////////////////
 
-TEST_F(test_x, TestFunction){
+TEST_F(test_AVLTree, InitializeTest){
 
 }
 
