@@ -1,7 +1,5 @@
 #include "AVLTree.h"
 
-
-
 // PlayerStats constructor definition
 PlayerStats::PlayerStats(const string& playerName, const string& playerTeam, 
                          const string& playerPosition, float value) {
@@ -33,6 +31,7 @@ AVLTree::AVLTree(bool highToLow) {
 }
 AVLTree::AVLTree() {
     root = nullptr;
+    isHighToLow = true;
 }
 
 
@@ -151,7 +150,6 @@ shared_ptr<AVLNode> AVLTree::insertNode(shared_ptr<AVLNode> node, const PlayerSt
     return rebalanceTree(node);
 }
 
-
 shared_ptr<AVLNode> AVLTree::removeNode(shared_ptr<AVLNode> node, float statValue) {
     if (node == nullptr) {
         return node;
@@ -222,7 +220,6 @@ shared_ptr<AVLNode> AVLTree::rebalanceTree(shared_ptr<AVLNode> node) {
     return node;
 }
 
-
 void AVLTree::inOrderTraversal(shared_ptr<AVLNode> node, function<void(const PlayerStats&)> func) const {
     if (node != nullptr) {
         inOrderTraversal(node->left, func);
@@ -230,5 +227,3 @@ void AVLTree::inOrderTraversal(shared_ptr<AVLNode> node, function<void(const Pla
         inOrderTraversal(node->right, func);
     }
 }
-
-
