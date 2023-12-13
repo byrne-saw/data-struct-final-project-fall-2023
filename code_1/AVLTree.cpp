@@ -129,80 +129,51 @@ shared_ptr<AVLNode> AVLTree::minValueNode(shared_ptr<AVLNode> node) {
 }
 
 shared_ptr<AVLNode> AVLTree::insertNode(shared_ptr<AVLNode> node, const PlayerStats& player) {
-    // Perform standard BST insertion based on statValue
     if (node == nullptr) {
         return make_shared<AVLNode>(player);
     }
 
-    if (player.statValue < node->data.statValue) {
+    if ((isHighToLow && player.statValue > node->data.statValue) ||
+        (!isHighToLow && player.statValue < node->data.statValue)) {
         node->left = insertNode(node->left, player);
-    } else if (player.statValue > node->data.statValue) {
+    } else if ((isHighToLow && player.statValue < node->data.statValue) ||
+               (!isHighToLow && player.statValue > node->data.statValue)) {
         node->right = insertNode(node->right, player);
     } else {
-        // Duplicate statValue found, output an error
         cout << "Error: A player with statValue " << player.statValue << " already exists." << endl;
-        return node; // Return the current node without inserting a new one
+        return node;
     }
 
     // Update the height of the node
     node->height = 1 + max(getHeight(node->left), getHeight(node->right));
 
-    // Calculate the balance factor
-    int balance = getBalanceFactor(node);
-
-    // Balance the tree based on the balance factor and statValue
-    // Left Left Case
-    if (balance > 1 && player.statValue < node->left->data.statValue) {
-        return rightRotate(node);
-    }
-
-    // Right Right Case
-    if (balance < -1 && player.statValue > node->right->data.statValue) {
-        return leftRotate(node);
-    }
-
-    // Left Right Case
-    if (balance > 1 && player.statValue > node->left->data.statValue) {
-        node->left = leftRotate(node->left);
-        return rightRotate(node);
-    }
-
-    // Right Left Case
-    if (balance < -1 && player.statValue < node->right->data.statValue) {
-        node->right = rightRotate(node->right);
-        return leftRotate(node);
-    }
-
-    // Return the (potentially changed) node pointer
-    return node;
+    // Use rebalanceTree to balance the AVL tree
+    return rebalanceTree(node);
 }
 
+
 shared_ptr<AVLNode> AVLTree::removeNode(shared_ptr<AVLNode> node, float statValue) {
-    // Step 1: Perform standard BST delete
     if (node == nullptr) {
         return node;
     }
 
-    // If the statValue to be deleted is smaller than the node's statValue, then it lies in the left subtree
-    if (statValue < node->data.statValue) {
+    // Navigate to the node to be removed based on statValue
+    if ((isHighToLow && statValue > node->data.statValue) ||
+        (!isHighToLow && statValue < node->data.statValue)) {
         node->left = removeNode(node->left, statValue);
-    }
-    // If the statValue to be deleted is greater than the node's statValue, then it lies in the right subtree
-    else if (statValue > node->data.statValue) {
+    } else if ((isHighToLow && statValue < node->data.statValue) ||
+               (!isHighToLow && statValue > node->data.statValue)) {
         node->right = removeNode(node->right, statValue);
-    }
-    // If statValue is the same as node's statValue, then this is the node to be deleted
-    else {
+    } else {
         // Node with only one child or no child
-        if ((node->left == nullptr) || (node->right == nullptr)) {
+        if (node->left == nullptr || node->right == nullptr) {
             shared_ptr<AVLNode> temp = node->left ? node->left : node->right;
 
             // No child case
             if (temp == nullptr) {
-                temp = node;
-                node = nullptr;
+                return nullptr;
             } else { // One child case
-                *node = *temp; // Copy the contents of the non-empty child
+                return temp; // Return the non-empty child
             }
         } else {
             // Node with two children: Get the inorder successor (smallest in the right subtree)
@@ -216,18 +187,16 @@ shared_ptr<AVLNode> AVLTree::removeNode(shared_ptr<AVLNode> node, float statValu
         }
     }
 
-    // If the tree had only one node then return
-    if (node == nullptr) {
-        return node;
-    }
-
-    // Step 2: Update the height of the current node
+    // Update the height of the current node
     node->height = 1 + max(getHeight(node->left), getHeight(node->right));
 
-    // Step 3: Get the balance factor of this node to check whether this node became unbalanced
+    // Rebalance the tree
+    return rebalanceTree(node);
+}
+
+shared_ptr<AVLNode> AVLTree::rebalanceTree(shared_ptr<AVLNode> node) {
     int balance = getBalanceFactor(node);
 
-    // Step 4: If the node becomes unbalanced, then balance the tree
     // Left Left Case
     if (balance > 1 && getBalanceFactor(node->left) >= 0) {
         return rightRotate(node);
@@ -252,6 +221,7 @@ shared_ptr<AVLNode> AVLTree::removeNode(shared_ptr<AVLNode> node, float statValu
 
     return node;
 }
+
 
 void AVLTree::inOrderTraversal(shared_ptr<AVLNode> node, function<void(const PlayerStats&)> func) const {
     if (node != nullptr) {

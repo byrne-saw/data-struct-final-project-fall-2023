@@ -47,7 +47,7 @@ public:
 private:
     shared_ptr<AVLNode> root;
     bool isHighToLow; // True for high-to-low sorting of statValue, false for low-to-high
-
+    
     // Helper functions for AVL operations
     int getHeight(shared_ptr<AVLNode> node) const;
     int getBalanceFactor(shared_ptr<AVLNode> node) const;
@@ -56,6 +56,7 @@ private:
     shared_ptr<AVLNode> leftRotate(shared_ptr<AVLNode> x);
     shared_ptr<AVLNode> insertNode(shared_ptr<AVLNode> node, const PlayerStats& player);
     shared_ptr<AVLNode> removeNode(shared_ptr<AVLNode> node, float statValue);
+    shared_ptr<AVLNode> rebalanceTree(shared_ptr<AVLNode> node);
     void inOrderTraversal(shared_ptr<AVLNode> node, function<void(const PlayerStats&)> func) const;
 };
 
