@@ -1,0 +1,13 @@
+digraph AVLTree {
+    node15 [label="9\n(0)\nEve\nTeamE\nForward"];
+    node16 [label="8\n(1)\nDavid\nTeamD\nGoalkeeper"];
+    node17 [label="7\n(0)\nFrank\nTeamF\nMidfielder"];
+    node16 -> node17;
+    node15 -> node16;
+    node18 [label="12\n(0)\nCharlie\nTeamC\nDefender"];
+    node19 [label="10\n(0)\nBob\nTeamB\nMidfielder"];
+    node18 -> node19;
+    node20 [label="15.5\n(0)\nAlice\nTeamA\nForward"];
+    node18 -> node20;
+    node15 -> node18;
+}

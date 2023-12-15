@@ -1,0 +1,5 @@
+digraph AVLTree {
+    node1 [label="15.5\n(-1)\nAlice\nTeamA\nForward"];
+    node2 [label="10\n(0)\nBob\nTeamB\nMidfielder"];
+    node1 -> node2;
+}
