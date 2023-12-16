@@ -2,6 +2,7 @@
 #include <iomanip>  // For std::setw
 #include <fstream>
 #include <memory>
+#include <cstdlib>
 
 // PlayerStats constructor definition
 PlayerStats::PlayerStats(const string& playerName, const string& playerTeam, 
@@ -235,29 +236,6 @@ void AVLTree::displayTree() const {
     displayTreeHelper(root, 0);
 }
 
-
-// void AVLTree::displayTreeHelper(shared_ptr<AVLNode> node, int space) const {
-//     if (node == nullptr) {
-//         return;
-//     }
-
-//     // Increase distance between levels
-//     space += 10;
-
-//     // Process right child first
-//     displayTreeHelper(node->right, space);
-
-//     // Print current node after space
-//     std::cout << std::endl;
-//     for (int i = 10; i < space; i++) {
-//         std::cout << ' ';
-//     }
-//     std::cout << node->data.statValue << "(" << getBalanceFactor(node) << ")" << std::endl;
-
-//     // Process left child
-//     displayTreeHelper(node->left, space);
-// }
-
 void AVLTree::displayTreeHelper(shared_ptr<AVLNode> node, int depth) const {
     if (node == nullptr) {
         return;
@@ -278,63 +256,6 @@ void AVLTree::displayTreeHelper(shared_ptr<AVLNode> node, int depth) const {
     // Process left child
     displayTreeHelper(node->left, newDepth);
 }
-
-// void AVLTree::generateDotRepresentation(shared_ptr<AVLNode> node, ostream& out) const {
-//     if (!node) return;
-//     if (node->left) {
-//         out << node->data.statValue << " -> " << node->left->data.statValue << ";\n";
-//         generateDotRepresentation(node->left, out);
-//     }
-//     if (node->right) {
-//         out << node->data.statValue << " -> " << node->right->data.statValue << ";\n";
-//         generateDotRepresentation(node->right, out);
-//     }
-// }
-
-// void AVLTree::generateDotRepresentation(shared_ptr<AVLNode> node, ostream& out) const {
-//     if (!node) return;
-
-//     // Create a label for the node with multiple values from `data`
-//     out << "\"" << node->data.statValue 
-//         << "\\n" << node->data.name 
-//         << "\\n" << node->data.team 
-//         << "\\n" << node->data.position << "\"";
-
-//     if (node->left) {
-//         // Connect to left child with a line and create its label
-//         out << " -> \"" << node->left->data.statValue 
-//             << "\\n" << node->left->data.name 
-//             << "\\n" << node->left->data.team 
-//             << "\\n" << node->left->data.position << "\";\n";
-//         generateDotRepresentation(node->left, out);
-//     }
-//     if (node->right) {
-//         // Connect to right child with a line and create its label
-//         out << " -> \"" << node->right->data.statValue 
-//             << "\\n" << node->right->data.name 
-//             << "\\n" << node->right->data.team 
-//             << "\\n" << node->right->data.position << "\";\n";
-//         generateDotRepresentation(node->right, out);
-//     }
-// }
-
-
-// void AVLTree::exportToDot(const string& filename) const {
-//     std::ofstream out(filename);
-//     out << "digraph AVLTree {\n";
-//     generateDotRepresentation(root, out);
-//     out << "}\n";
-//     out.close();
-//     // need to install Graphviz to use this
-//     // sudo apt-get install graphviz
-//     // Construct the Graphviz command
-//     string outfile = filename.substr(0, filename.find_last_of(".")) + ".png";
-//     string command = "dot -Tpng " + filename + " -o " + outfile;
-    
-//     // Execute the command
-//     system(command.c_str());
-
-// }
 
 void AVLTree::generateDotRepresentation(shared_ptr<AVLNode> node, ostream& out) const {
     static int nodeId = 0;
