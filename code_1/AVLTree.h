@@ -43,6 +43,9 @@ public:
     void remove(float statValue);
     PlayerStats* find(float statValue) const;
     void displayStats() const;
+    void displayTree() const;
+    void exportToDot(const string& filename) const;
+    
 
 private:
     shared_ptr<AVLNode> root;
@@ -58,6 +61,9 @@ private:
     shared_ptr<AVLNode> removeNode(shared_ptr<AVLNode> node, float statValue);
     shared_ptr<AVLNode> rebalanceTree(shared_ptr<AVLNode> node);
     void inOrderTraversal(shared_ptr<AVLNode> node, function<void(const PlayerStats&)> func) const;
+    
+    void displayTreeHelper(shared_ptr<AVLNode> node, int space) const;
+    void generateDotRepresentation(shared_ptr<AVLNode> node, ostream& file) const;
 };
 
 #endif // AVL_TREE_H

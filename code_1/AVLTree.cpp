@@ -1,4 +1,8 @@
 #include "AVLTree.h"
+#include <iomanip>  // For std::setw
+#include <fstream>
+#include <memory>
+#include <cstdlib>
 
 // PlayerStats constructor definition
 PlayerStats::PlayerStats(const string& playerName, const string& playerTeam, 
@@ -226,4 +230,75 @@ void AVLTree::inOrderTraversal(shared_ptr<AVLNode> node, function<void(const Pla
         func(node->data);
         inOrderTraversal(node->right, func);
     }
+}
+
+void AVLTree::displayTree() const {
+    displayTreeHelper(root, 0);
+}
+
+void AVLTree::displayTreeHelper(shared_ptr<AVLNode> node, int depth) const {
+    if (node == nullptr) {
+        return;
+    }
+
+    // Increase depth for sub-levels
+    int newDepth = depth + 4;
+
+    // Process right child first (tree will be displayed with root on left)
+    displayTreeHelper(node->right, newDepth);
+
+    // Print current node
+    if (depth > 0) {
+        std::cout << std::setw(depth) << ' ';
+    }
+    std::cout << node->data.statValue << std::endl;
+
+    // Process left child
+    displayTreeHelper(node->left, newDepth);
+}
+
+void AVLTree::generateDotRepresentation(shared_ptr<AVLNode> node, ostream& out) const {
+    static int nodeId = 0;
+    int balanceFactor = getBalanceFactor(node);
+
+    if (!node) return;
+
+    // Define the current node
+    int currentNodeId = nodeId++;
+    out << "    node" << currentNodeId << " [label=\"" 
+        << node->data.statValue << "\\n" 
+        << "(" + to_string(balanceFactor) + ")" << "\\n"
+        << node->data.name
+        << "\\n" << node->data.team << "\\n" << node->data.position << "\"];\n";
+
+    if (node->left) {
+        // Define the left child and the edge to it
+        int leftChildId = nodeId;
+        generateDotRepresentation(node->left, out);
+        out << "    node" << currentNodeId << " -> node" << leftChildId << ";\n";
+    }
+
+    if (node->right) {
+        // Define the right child and the edge to it
+        int rightChildId = nodeId;
+        generateDotRepresentation(node->right, out);
+        out << "    node" << currentNodeId << " -> node" << rightChildId << ";\n";
+    }
+}
+
+void AVLTree::exportToDot(const string& filename) const {
+    std::ofstream out(filename);
+    out << "digraph AVLTree {\n";
+    generateDotRepresentation(root, out);
+    out << "}\n";
+    out.close();
+    // need to install Graphviz to use this
+    // sudo apt-get install graphviz
+    // Construct the Graphviz command
+    string outfile = filename.substr(0, filename.find_last_of(".")) + ".png";
+    string command = "dot -Tpng " + filename + " -o " + outfile;
+    
+    // Execute the command
+    system(command.c_str());
+
 }
