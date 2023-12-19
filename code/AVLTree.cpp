@@ -53,10 +53,14 @@ PlayerStats* AVLTree::find(float statValue) const {
         // Check if current node's data matches the statValue
         if (current->data.statValue == statValue) {
             return &(current->data);
-        } else if (statValue < current->data.statValue) {
-            current = current->left; // Go left if statValue is smaller
         } else {
-            current = current->right; // Go right otherwise
+            // Decide the direction of traversal based on isHighToLow flag
+            if ((isHighToLow && statValue > current->data.statValue) || 
+                (!isHighToLow && statValue < current->data.statValue)) {
+                current = current->left;
+            } else {
+                current = current->right;
+            }
         }
     }
     return nullptr; // Return nullptr if a player with the given statValue is not found

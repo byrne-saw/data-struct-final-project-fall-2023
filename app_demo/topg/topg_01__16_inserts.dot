@@ -1,0 +1,33 @@
+digraph AVLTree {
+    node167 [label="0.87\n(-1)\nRobert Miller\nEarth Enforcers\nCenter"];
+    node168 [label="0.24\n(1)\nWilliam Davis\nPluto Pirates\nCenter"];
+    node169 [label="0.15\n(0)\nRichard Jones\nEarth Enforcers\nPower Forward"];
+    node170 [label="0.02\n(0)\nCharles Williams\nPluto Pirates\nPower Forward"];
+    node169 -> node170;
+    node171 [label="0.22\n(0)\nDavid Smith\nEarth Enforcers\nCenter"];
+    node169 -> node171;
+    node168 -> node169;
+    node172 [label="0.56\n(0)\nRobert Davis\nEarth Enforcers\nSmall Forward"];
+    node168 -> node172;
+    node167 -> node168;
+    node173 [label="1.95\n(-1)\nJohn Smith\nEarth Enforcers\nPower Forward"];
+    node174 [label="1.18\n(0)\nRobert Wilson\nEarth Enforcers\nCenter"];
+    node175 [label="1\n(0)\nCharles Taylor\nEarth Enforcers\nShooting Guard"];
+    node174 -> node175;
+    node176 [label="1.7\n(0)\nCharles Brown\nEarth Enforcers\nShooting Guard"];
+    node174 -> node176;
+    node173 -> node174;
+    node177 [label="2.28\n(0)\nCharles Miller\nMars Mavericks\nSmall Forward"];
+    node178 [label="2.07\n(0)\nJames Moore\nMercury Monarchs\nSmall Forward"];
+    node179 [label="2.05\n(0)\nWilliam Smith\nJupiter Giants\nPower Forward"];
+    node178 -> node179;
+    node180 [label="2.18\n(0)\nJoseph Taylor\nQuantum Quakers\nShooting Guard"];
+    node178 -> node180;
+    node177 -> node178;
+    node181 [label="2.42\n(-1)\nRobert Williams\nNeptune Ninjas\nCenter"];
+    node182 [label="2.5\n(0)\nThomas Johnson\nQuantum Quakers\nShooting Guard"];
+    node181 -> node182;
+    node177 -> node181;
+    node173 -> node177;
+    node167 -> node173;
+}

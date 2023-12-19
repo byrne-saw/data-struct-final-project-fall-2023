@@ -1,0 +1,19 @@
+digraph AVLTree {
+    node83 [label="1.95\n(1)\nJohn Smith\nEarth Enforcers\nPower Forward"];
+    node84 [label="0.24\n(-1)\nWilliam Davis\nPluto Pirates\nCenter"];
+    node85 [label="0.15\n(0)\nRichard Jones\nEarth Enforcers\nPower Forward"];
+    node84 -> node85;
+    node86 [label="1\n(0)\nCharles Taylor\nEarth Enforcers\nShooting Guard"];
+    node87 [label="0.87\n(0)\nRobert Miller\nEarth Enforcers\nCenter"];
+    node86 -> node87;
+    node88 [label="1.18\n(0)\nRobert Wilson\nEarth Enforcers\nCenter"];
+    node86 -> node88;
+    node84 -> node86;
+    node83 -> node84;
+    node89 [label="2.07\n(0)\nJames Moore\nMercury Monarchs\nSmall Forward"];
+    node90 [label="2.05\n(0)\nWilliam Smith\nJupiter Giants\nPower Forward"];
+    node89 -> node90;
+    node91 [label="2.42\n(0)\nRobert Williams\nNeptune Ninjas\nCenter"];
+    node89 -> node91;
+    node83 -> node89;
+}
