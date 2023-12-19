@@ -281,9 +281,9 @@ int main() {
     // Create a visual representation of the AVLTree
     cout << "Creating a visual representation of the veryLargeAVLTree after 25 insertions" << endl << "..." << endl;
 
-    veryLargeAVLTree.exportToDot("../app_demo/very_large_avl_tree/very_large_avl_tree_01__25_inserts_" + now + ".dot");
+    veryLargeAVLTree.exportToDot("../app_demo/very_large_avl_tree/very_large_avl_tree_" + now + "_01__25_inserts.dot");
 
-    cout << "../app_demo/very_large_avl_tree/very_large_avl_tree_01__25_inserts_" + now + ".dot and very_large_avl_tree_01__25_inserts_" + now + ".png created" << endl;
+    cout << "../app_demo/very_large_avl_tree/very_large_avl_tree_" + now + "_01__25_inserts.dot and very_large_avl_tree/very_large_avl_tree_" + now + "_01__25_inserts.png created" << endl;
     cout << "------------------------------------" << endl;
 
     // insert 55 more nodes with random statValues into veryLargeAVLTree
@@ -299,9 +299,9 @@ int main() {
     // Create a visual representation of the AVLTree
     cout << "Creating a visual representation of the veryLargeAVLTree after 80 insertions" << endl << "..." << endl;
 
-    veryLargeAVLTree.exportToDot("../app_demo/very_large_avl_tree/very_large_avl_tree_02__80_inserts_" + now + ".dot");
+    veryLargeAVLTree.exportToDot("../app_demo/very_large_avl_tree/very_large_avl_tree_" + now + "_02__80_inserts_.dot");
 
-    cout << "../app_demo/very_large_avl_tree/very_large_avl_tree_02__80_inserts_" + now + ".dot and very_large_avl_tree_02__80_inserts_" + now + ".png created" << endl;
+    cout << "../app_demo/very_large_avl_tree/very_large_avl_tree_" + now + "_02__80_inserts_.dot and very_large_avl_tree_" + now + "_02__80_inserts_.png created" << endl;
     cout << "------------------------------------" << endl;
 
     // insert 1000 more nodes with random statValues into veryLargeAVLTree
@@ -317,9 +317,9 @@ int main() {
     // Create a visual representation of the AVLTree
     cout << "Creating a visual representation of the veryLargeAVLTree after 1080 insertions" << endl << "..." << endl;
 
-    veryLargeAVLTree.exportToDot("../app_demo/very_large_avl_tree/very_large_avl_tree_03__1080_inserts_" + now + ".dot");
+    veryLargeAVLTree.exportToDot("../app_demo/very_large_avl_tree/very_large_avl_tree_" + now + "_03__1080_inserts.dot");
 
-    cout << "../app_demo/very_large_avl_tree/very_large_avl_tree_03__1080_inserts_" + now + ".dot and very_large_avl_tree_03__1080_inserts_" + now + ".png created" << endl;
+    cout << "../app_demo/very_large_avl_tree/very_large_avl_tree_" + now + "_03__1080_inserts.dot and very_large_avl_tree_" + now + "_03__1080_inserts.png created" << endl;
     cout << "------------------------------------" << endl;
 
 
