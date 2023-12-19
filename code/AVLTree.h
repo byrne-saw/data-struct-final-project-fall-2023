@@ -8,6 +8,7 @@
 #include <iomanip>  // For std::setw
 #include <fstream>
 #include <cstdlib>
+#include <sstream>
 
 using namespace std;
 
