@@ -114,9 +114,10 @@ int main() {
 
     cout << "------------------------------------" << endl;
 
-    cout << "Using the Find Function to find a node by statValue of 35.72f" << endl << "..." << endl;
+    cout << "Using the Find Function to find a node by statValue of 18.33f" << endl << "..." << endl;
 
-    searchStatValue = 35.72f;
+    searchStatValue = 18.33f;
+    foundPlayer = PPG.find(searchStatValue);
     if (foundPlayer != nullptr) {
         cout << "Found player with statValue " << searchStatValue << ": " << foundPlayer->name << endl;
     } else {
