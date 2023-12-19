@@ -1,8 +1,4 @@
 #include "AVLTree.h"
-#include <iomanip>  // For std::setw
-#include <fstream>
-#include <memory>
-#include <cstdlib>
 
 // PlayerStats constructor definition
 PlayerStats::PlayerStats(const string& playerName, const string& playerTeam, 

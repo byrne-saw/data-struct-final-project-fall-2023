@@ -1,9 +1,4 @@
-#include <iostream>
-#include <fstream>
-
-#include "../code_1/AVLTree.h"
-
-using namespace std;
+#include "../code/AVLTree.h"
 
 int main() {
     // Create an AVLTree instance

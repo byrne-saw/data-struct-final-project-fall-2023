@@ -14,9 +14,9 @@ project(${ProjectId})
 
 # defince cmake variables for file locations
 file(GLOB USER_FILES_1
-"code_1/*.h"
-"code_1/*.cpp"
-"code_1/*.hpp"
+"code/*.h"
+"code/*.cpp"
+"code/*.hpp"
 )
 
 
@@ -74,3 +74,4 @@ ENABLE_TESTING()
 
 # create an executables in the app folder
 add_executable( run_app_1 "app_1/main_1.cpp" ${USER_FILES_1} )
+add_executable( run_app_demo "app_demo/main_demo.cpp" ${USER_FILES_1} )
