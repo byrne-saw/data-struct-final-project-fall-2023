@@ -1,0 +1,5 @@
+digraph AVLTree {
+    node48 [label="0.15\n(-1)\nRichard Jones\nEarth Enforcers\nPower Forward"];
+    node49 [label="1.95\n(0)\nJohn Smith\nEarth Enforcers\nPower Forward"];
+    node48 -> node49;
+}

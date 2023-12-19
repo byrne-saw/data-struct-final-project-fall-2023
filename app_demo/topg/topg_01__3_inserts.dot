@@ -1,0 +1,7 @@
+digraph AVLTree {
+    node50 [label="0.24\n(0)\nWilliam Davis\nPluto Pirates\nCenter"];
+    node51 [label="0.15\n(0)\nRichard Jones\nEarth Enforcers\nPower Forward"];
+    node50 -> node51;
+    node52 [label="1.95\n(0)\nJohn Smith\nEarth Enforcers\nPower Forward"];
+    node50 -> node52;
+}

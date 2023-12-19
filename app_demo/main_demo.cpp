@@ -1,6 +1,35 @@
 #include "../code/AVLTree.h"
+#include <random>
+#include <chrono>
+#include <ctime>
+
+// function to generate random float between min and max
+float getRandomFloat(float min, float max) {
+    // Use random_device to seed the random number generator
+    random_device rd;
+    // Mersenne Twister: Good quality random number generator
+    mt19937 rng(rd());
+    // Uniform distribution in range [min, max]
+    uniform_real_distribution<float> uni(min, max);
+    return uni(rng);
+}
+
+// getting current epoch time as a string for use in GraphViz file names
+string getCurrentEpochTimeAsString() {
+    // Get the current time as a time_point
+    auto now = chrono::system_clock::now();
+    // Convert to a duration since the epoch
+    auto epoch = now.time_since_epoch();
+    // Narrow the duration to seconds
+    auto value = std::chrono::duration_cast<std::chrono::seconds>(epoch);
+    // Convert to string
+    return to_string(value.count());
+}
 
 int main() {
+    cout << endl << "##################################################################"  << endl;
+    cout << "                  Begin Points Per Game (PPG) demo" << endl;
+    cout << "##################################################################"  << endl << endl;
     /*
     Points Per Game (PPG)
 
@@ -16,13 +45,12 @@ int main() {
             - Creating a visual GraphViz representation of the AVLTree after a node has been removed
             - Listing the stats in order after a node has been removed
     */
-
-    cout << "Begin begin Points Per Game (PPG) demo" << endl << endl;
     
-
     // Create an AVLTree instance to track PPG
     cout << "Creating an AVLTree instance to track PPG" << endl << "..." << endl;
+    
     AVLTree PPG;
+    
     cout << "AVLTree PPG instance created" << endl;
     cout << "------------------------------------" << endl;
 
@@ -97,30 +125,126 @@ int main() {
 
     cout << "------------------------------------" << endl;
 
-    
+    // List the stats in order
+    cout << "Listing the stats in order" << endl << "..." << endl;
+
+    PPG.displayStats();
+
+    cout << "------------------------------------" << endl;
+
+    // Remove the first node, the last node, and a middle node by statValue
+    cout << "Removing the first node from PPG by statValue of 39.75f" << endl << "..." << endl;
+
+    PPG.remove(39.75f);
+    cout << "Removing the last node from PPG by statValue of 25.31f" << endl << "..." << endl;
+    PPG.remove(25.31f);
+    cout << "Removing a middle node from PPG by statValue of 32.42f" << endl << "..." << endl;
+    PPG.remove(32.42f);
+
+    cout << "------------------------------------" << endl;
+    cout << "Displaying the stats in order after removals" << endl;
+    cout << "and creating a visual representation of the AVL tree" << "..." << endl;
+
+    PPG.displayStats();
+
+    cout << endl;
+    PPG.exportToDot("../app_demo/ppg/ppg_02__3_removals.dot");
+
+    cout << "../app_demo/ppg/ppg_02__3_removals.dot and ppg_02__3_removals.png created" << endl;
+    cout << "------------------------------------" << endl;
 
 
 
 
 
-
-
-
-
-
-
-   /* 
-   Turnovers Per Game (TOPG)
+    cout << endl << "##################################################################"  << endl;
+    cout << "                  Begin Turnovers Per Game (TOPG) Demo" << endl;
+    cout << "##################################################################"  << endl << endl;
+    /* 
+    Turnovers Per Game (TOPG)
 
         This section demonstrates:
             - Creating an AVLTree instance to track a low to high sorted stat
             - Inserting nodes into the AVLTree in random order
             - After every insertion a visual GraphViz representation of the AVLTree is created
             
-   */ 
+    */ 
 
-  /*
-  Very large AVL Tree
+    // Create an AVLTree instance to track TOPG
+    cout << "Creating an AVLTree instance to track TOPG" << endl << "..." << endl;
+    
+    AVLTree TOPG(false);
+    
+    cout << "AVLTree TOPG instance created" << endl;
+    cout << "------------------------------------" << endl;   
+
+    // Insert 25 PlayerStats into the TOPG and create a visual representation of TOPG after each insertion
+    cout << "Inserting 25 PlayerStats into the TOPG and creating 25 visualizations" << endl << "..." << endl;
+
+    TOPG.insert(PlayerStats("Richard Jones", "Earth Enforcers", "Power Forward", 0.15f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__1_insert.dot");
+    TOPG.insert(PlayerStats("John Smith", "Earth Enforcers", "Power Forward", 1.95f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__2_inserts.dot");
+    TOPG.insert(PlayerStats("William Davis", "Pluto Pirates", "Center", 0.24f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__3_inserts.dot");
+    TOPG.insert(PlayerStats("Robert Williams", "Neptune Ninjas", "Center", 2.42f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__4_inserts.dot");
+    TOPG.insert(PlayerStats("Robert Miller", "Earth Enforcers", "Center", 0.87f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__5_inserts.dot");
+    TOPG.insert(PlayerStats("James Moore", "Mercury Monarchs", "Small Forward", 2.07f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__6_inserts.dot");
+    TOPG.insert(PlayerStats("Charles Taylor", "Earth Enforcers", "Shooting Guard", 1.0f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__7_inserts.dot");
+    TOPG.insert(PlayerStats("Robert Wilson", "Earth Enforcers", "Center", 1.18f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__8_inserts.dot");
+    TOPG.insert(PlayerStats("William Smith", "Jupiter Giants", "Power Forward", 2.05f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__9_inserts.dot");
+    TOPG.insert(PlayerStats("Robert Davis", "Earth Enforcers", "Small Forward", 0.56f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__10_inserts.dot");
+    TOPG.insert(PlayerStats("David Smith", "Earth Enforcers", "Center", 0.22f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__11_inserts.dot");
+    TOPG.insert(PlayerStats("Thomas Johnson", "Quantum Quakers", "Shooting Guard", 2.5f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__12_inserts.dot");
+    TOPG.insert(PlayerStats("Charles Miller", "Mars Mavericks", "Small Forward", 2.28f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__13_inserts.dot");
+    TOPG.insert(PlayerStats("Joseph Taylor", "Quantum Quakers", "Shooting Guard", 2.18f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__14_inserts.dot");
+    TOPG.insert(PlayerStats("Charles Williams", "Pluto Pirates", "Power Forward", 0.02f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__15_inserts.dot");
+    TOPG.insert(PlayerStats("Charles Brown", "Earth Enforcers", "Shooting Guard", 1.7f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__16_inserts.dot");
+    TOPG.insert(PlayerStats("Charles Davis", "Venus Vikings", "Point Guard", 0.96f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__17_inserts.dot");
+    TOPG.insert(PlayerStats("James Davis", "Neptune Ninjas", "Point Guard", 0.25f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__18_inserts.dot");
+    TOPG.insert(PlayerStats("James Taylor", "Quantum Quakers", "Point Guard", 0.62f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__19_inserts.dot");
+    TOPG.insert(PlayerStats("David Johnson", "Mars Mavericks", "Shooting Guard", 1.06f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__20_inserts.dot");
+    TOPG.insert(PlayerStats("David Moore", "Jupiter Giants", "Power Forward", 0.32f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__21_inserts.dot");
+    TOPG.insert(PlayerStats("John Wilson", "Galactic Gladiators", "Point Guard", 2.26f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__22_inserts.dot");
+    TOPG.insert(PlayerStats("Thomas Jones", "Galactic Gladiators", "Shooting Guard", 2.45f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__23_inserts.dot");
+    TOPG.insert(PlayerStats("John Taylor", "Neptune Ninjas", "Shooting Guard", 1.49f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__24_inserts.dot");
+    TOPG.insert(PlayerStats("Charles Moore", "Saturn Spartans", "Point Guard", 2.19f));
+    TOPG.exportToDot("../app_demo/topg/topg_01__25_inserts.dot");
+    
+    cout << "25 PlayerStats inserted into the TOPG and 25 visualizations created " << endl;
+    cout << "------------------------------------" << endl;
+
+
+
+
+
+
+    cout << endl << "##################################################################"  << endl;
+    cout << "                  Begin Very large AVL Tree Demo" << endl;
+    cout << "##################################################################"  << endl << endl;
+    /*
+    Very large AVL Tree
 
         This section demonstrates:
             - Mocking up the creation of a very large AVLTree
@@ -128,7 +252,77 @@ int main() {
                 the adherence to the AVLTree invariants 
             - These trees are randomly created every time the program is run, GraphViz files
                 are created with timestamps appended by a _int to prevent overwriting
-  */
+    */
+    // Set variables used for random value generation and a time indicator for the GraphViz files
+    float min = 0.0f;
+    float max = 1000.0f;
+    string now = getCurrentEpochTimeAsString();
+    // Create an AVLTree instance
+    cout << "Creating an AVLTree instance to track a very large AVLTree" << endl << "..." << endl;
+
+    AVLTree veryLargeAVLTree;
+
+    cout << "AVLTree veryLargeAVLTree instance created" << endl;
+    cout << "------------------------------------" << endl;
+
+    // insert 25 nodes with random statValues into veryLargeAVLTree
+    // for this demonstration we won't populate name, team, or position
+    // it's possible (but unlikely) that a duplicate node will be inserted, in which case
+    // an error message will be written to the terminal and the node will not be inserted
+    cout << "Inserting 25 random PlayerStats into the veryLargeAVLTree" << endl << "..." << endl;
+
+    for (int i = 0; i < 25; i++) {
+        veryLargeAVLTree.insert(PlayerStats("", "", "", getRandomFloat(min, max)));
+    }
+
+    cout << "25 random PlayerStats inserted into the veryLargeAVLTree" << endl;
+    cout << "------------------------------------" << endl;
+
+    // Create a visual representation of the AVLTree
+    cout << "Creating a visual representation of the veryLargeAVLTree after 25 insertions" << endl << "..." << endl;
+
+    veryLargeAVLTree.exportToDot("../app_demo/very_large_avl_tree/very_large_avl_tree_01__25_inserts_" + now + ".dot");
+
+    cout << "../app_demo/very_large_avl_tree/very_large_avl_tree_01__25_inserts_" + now + ".dot and very_large_avl_tree_01__25_inserts_" + now + ".png created" << endl;
+    cout << "------------------------------------" << endl;
+
+    // insert 55 more nodes with random statValues into veryLargeAVLTree
+    cout << "Inserting 55 random PlayerStats into the veryLargeAVLTree" << endl << "..." << endl;
+
+    for (int i = 0; i < 55; i++) {
+        veryLargeAVLTree.insert(PlayerStats("", "", "", getRandomFloat(min, max)));
+    }
+
+    cout << "55 random PlayerStats inserted into the veryLargeAVLTree" << endl;
+    cout << "------------------------------------" << endl;
+
+    // Create a visual representation of the AVLTree
+    cout << "Creating a visual representation of the veryLargeAVLTree after 80 insertions" << endl << "..." << endl;
+
+    veryLargeAVLTree.exportToDot("../app_demo/very_large_avl_tree/very_large_avl_tree_02__80_inserts_" + now + ".dot");
+
+    cout << "../app_demo/very_large_avl_tree/very_large_avl_tree_02__80_inserts_" + now + ".dot and very_large_avl_tree_02__80_inserts_" + now + ".png created" << endl;
+    cout << "------------------------------------" << endl;
+
+    // insert 1000 more nodes with random statValues into veryLargeAVLTree
+    cout << "Inserting 1000 random PlayerStats into the veryLargeAVLTree" << endl << "..." << endl;
+
+    for (int i = 0; i < 1000; i++) {
+        veryLargeAVLTree.insert(PlayerStats("", "", "", getRandomFloat(min, max)));
+    }
+
+    cout << "1000 random PlayerStats inserted into the veryLargeAVLTree" << endl;
+    cout << "------------------------------------" << endl;
+
+    // Create a visual representation of the AVLTree
+    cout << "Creating a visual representation of the veryLargeAVLTree after 1080 insertions" << endl << "..." << endl;
+
+    veryLargeAVLTree.exportToDot("../app_demo/very_large_avl_tree/very_large_avl_tree_03__1080_inserts_" + now + ".dot");
+
+    cout << "../app_demo/very_large_avl_tree/very_large_avl_tree_03__1080_inserts_" + now + ".dot and very_large_avl_tree_03__1080_inserts_" + now + ".png created" << endl;
+    cout << "------------------------------------" << endl;
+
+
     return 0;
 }
 
