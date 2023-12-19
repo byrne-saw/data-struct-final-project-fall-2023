@@ -249,9 +249,9 @@ void AVLTree::displayTreeHelper(shared_ptr<AVLNode> node, int depth) const {
 
     // Print current node
     if (depth > 0) {
-        std::cout << std::setw(depth) << ' ';
+        cout << setw(depth) << ' ';
     }
-    std::cout << node->data.statValue << std::endl;
+    cout << node->data.statValue << endl;
 
     // Process left child
     displayTreeHelper(node->left, newDepth);
@@ -287,7 +287,7 @@ void AVLTree::generateDotRepresentation(shared_ptr<AVLNode> node, ostream& out) 
 }
 
 void AVLTree::exportToDot(const string& filename) const {
-    std::ofstream out(filename);
+    ofstream out(filename);
     out << "digraph AVLTree {\n";
     generateDotRepresentation(root, out);
     out << "}\n";
